@@ -33,7 +33,7 @@ defmodule Phoenix.Token.Plug.EnsureAuthenticated do
   import Plug.Conn
 
   @doc false
-  def init(default_opts), do: default_opts
+  def init(opts), do: opts
 
   @doc false
   def call(conn, opts) do
