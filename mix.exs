@@ -1,12 +1,20 @@
 defmodule PhoenixTokenPlug.Mixfile do
   use Mix.Project
 
+  @version "0.1.0"
+  @url "https://github.com/bobbypriambodo/phoenix_token_plug"
+  @maintainers [
+    "Bobby Priambodo"
+  ]
+
   def project do
     [app: :phoenix_token_plug,
-     version: "0.1.0",
+     version: @version,
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     description: description(),
+     package: package(),
      deps: deps()]
   end
 
@@ -14,7 +22,7 @@ defmodule PhoenixTokenPlug.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:phoenix, :plug, :logger]]
+    [applications: [:phoenix, :plug]]
   end
 
   # Dependencies can be Hex packages:
@@ -31,5 +39,18 @@ defmodule PhoenixTokenPlug.Mixfile do
      {:plug, "~> 1.0"},
      {:credo, "~> 0.5", only: [:dev, :test]},
      {:ex_doc, "~> 0.14", only: :dev}]
+  end
+
+  defp description do
+    """
+    Collection of plugs for Phoenix.Token-based authentication.
+    """
+  end
+
+  defp package do
+    [files: ["lib", "mix.exs", "README.md", "LICENSE"],
+     maintainers: @maintainers,
+     licenses: ["MIT"],
+     links: %{"GitHub" => @url}]
   end
 end
