@@ -18,7 +18,7 @@ This library kind of mirrors a part of what Guardian does except that it uses Ph
 
     ```elixir
     def deps do
-      [{:phoenix_token_plug, "~> 0.1.0"}]
+      [{:phoenix_token_plug, "~> 0.2"}]
     end
     ```
 
