@@ -1,9 +1,9 @@
-defmodule Phoenix.Token.Plug.EnsureAuthenticatedTest do
+defmodule PhoenixTokenPlug.EnsureAuthenticatedTest do
   use ExUnit.Case, async: true
 
   import Plug.Conn
 
-  alias Phoenix.Token.Plug.EnsureAuthenticated
+  alias PhoenixTokenPlug.EnsureAuthenticated
 
   defmodule UnauthenticatedHandler do
     def unauthenticated(conn, _params) do

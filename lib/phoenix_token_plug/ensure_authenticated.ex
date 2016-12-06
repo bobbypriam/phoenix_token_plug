@@ -1,6 +1,6 @@
-defmodule Phoenix.Token.Plug.EnsureAuthenticated do
+defmodule PhoenixTokenPlug.EnsureAuthenticated do
   @moduledoc """
-  Ensures the verification by `Phoenix.Token.Plug.VerifyHeader`
+  Ensures the verification by `PhoenixTokenPlug.VerifyHeader`
   of the request was successful by checking the existence of
   `conn.assigns.user`.
 
@@ -12,7 +12,7 @@ defmodule Phoenix.Token.Plug.EnsureAuthenticated do
 
   Add this to your `router.ex`, possibly inside a pipeline:
 
-      plug Phoenix.Token.Plug.EnsureAuthenticated,
+      plug PhoenixTokenPlug.EnsureAuthenticated,
         handler: MyApp.AuthController  # Or whatever module you want
 
   Then, in your `MyApp.AuthController`:

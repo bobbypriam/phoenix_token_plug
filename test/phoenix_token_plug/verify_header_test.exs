@@ -1,9 +1,9 @@
-defmodule Phoenix.Token.Plug.VerifyHeaderTest do
+defmodule PhoenixTokenPlug.VerifyHeaderTest do
   use ExUnit.Case, async: true
 
   import Plug.Conn
 
-  alias Phoenix.Token.Plug.VerifyHeader
+  alias PhoenixTokenPlug.VerifyHeader
 
   defmodule TokenEndpoint do
     def config(:secret_key_base), do: "abc123"

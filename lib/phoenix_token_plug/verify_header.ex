@@ -1,4 +1,4 @@
-defmodule Phoenix.Token.Plug.VerifyHeader do
+defmodule PhoenixTokenPlug.VerifyHeader do
   @moduledoc """
   Checks if there is an authentication token is in the HTTP header.
   If one exists, it assigns the token payload to `conn.assigns.user`.
@@ -8,13 +8,13 @@ defmodule Phoenix.Token.Plug.VerifyHeader do
       Authorization: Bearer <your Phoenix.Token>
 
   Note that this does *not* enforce authentication. To have protected
-  routes, use this in conjuction with `Phoenix.Token.Plug.EnsureAuthenticated`.
+  routes, use this in conjuction with `PhoenixTokenPlug.EnsureAuthenticated`.
 
   # Usage
 
   Add this to your `router.ex`, possibly inside a pipeline:
 
-      plug Phoenix.Token.Plug.VerifyHeader,
+      plug PhoenixTokenPlug.VerifyHeader,
         salt: "user",
         max_age: 1_209_600
   """

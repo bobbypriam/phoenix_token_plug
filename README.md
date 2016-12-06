@@ -1,4 +1,4 @@
-# Phoenix.Token.Plug
+# PhoenixTokenPlug
 
 Collection of plugs for `Phoenix.Token`-based authentication. Useful for authenticating API calls.
 
@@ -43,7 +43,7 @@ defmodule MyApp.Router do
 
     # Checks for Authorization: Bearer <token> header, and adds
     # the token payload to conn.assigns.user if token exists
-    plug Phoenix.Token.Plug.VerifyHeader,
+    plug PhoenixTokenPlug.VerifyHeader,
       salt: "user",
       max_age: 1_209_600
   end
@@ -51,7 +51,7 @@ defmodule MyApp.Router do
   pipeline :protected do
     # Checks if conn.assigns.user exists; if not, will
     # call MyApp.AuthController.unauthenticated/2
-    plug Phoenix.Token.Plug.EnsureAuthenticated,
+    plug PhoenixTokenPlug.EnsureAuthenticated,
       handler: MyApp.AuthController # Or any other module
   end
 
