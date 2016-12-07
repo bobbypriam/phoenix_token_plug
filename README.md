@@ -80,3 +80,5 @@ defmodule MyApp.AuthController do
   # ...
 end
 ```
+
+For further customization options, please consult the [docs](https://hexdocs.pm/phoenix_token_plug).
