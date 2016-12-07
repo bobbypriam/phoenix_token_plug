@@ -36,7 +36,12 @@ defmodule PhoenixTokenPlug.VerifyHeaderTest do
     assert conn.assigns.user == @user
   end
 
-  defp authorized_conn(salt) do
+  test "can customize assign key" do
+    conn = authorized_conn() |> VerifyHeader.call(key: :foo)
+    assert conn.assigns.foo == @user
+  end
+
+  defp authorized_conn(salt \\ "user") do
     token = get_token(conn, salt, @user)
     conn() |> put_req_header("authorization", "Bearer #{token}")
   end

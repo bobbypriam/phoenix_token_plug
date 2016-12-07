@@ -28,6 +28,12 @@ defmodule PhoenixTokenPlug.EnsureAuthenticated do
 
         # ...
       end
+
+  You might pass several options to the plugs:
+
+      plug PhoenixTokenPlug.EnsureAuthenticated,
+        handler: MyApp.AuthController  # (required) The handler module
+        key: :foo                      # (optional) Customize lookup key for conn.assigns, defaults to :user
   """
 
   import Plug.Conn
@@ -38,7 +44,8 @@ defmodule PhoenixTokenPlug.EnsureAuthenticated do
   @doc false
   def call(conn, opts) do
     handler = Keyword.get(opts, :handler)
-    case conn.assigns[:user] do
+    key = Keyword.get(opts, :key, :user)
+    case conn.assigns[key] do
       nil ->
         conn = conn |> halt
         apply(handler, :unauthenticated, [conn, conn.params])

@@ -15,8 +15,9 @@ defmodule PhoenixTokenPlug.VerifyHeader do
   Add this to your `router.ex`, possibly inside a pipeline:
 
       plug PhoenixTokenPlug.VerifyHeader,
-        salt: "user",
-        max_age: 1_209_600
+        salt: "user",       # (optional) customize the salt for Phoenix.Token, defaults to "user"
+        max_age: 1_209_600, # (optional) validate token max age in seconds, default to 1_209_600 (2 weeks)
+        key: :foo           # (optional) customize the conn assign key, defaults to :user
   """
 
   import Plug.Conn
@@ -26,10 +27,11 @@ defmodule PhoenixTokenPlug.VerifyHeader do
 
   @doc false
   def call(conn, opts) do
+    key = Keyword.get(opts, :key, :user)
     token = fetch_token(get_req_header(conn, "authorization"))
     case verify_token(conn, token, opts) do
       {:ok, payload} ->
-        assign(conn, :user, payload)
+        assign(conn, key, payload)
       {:error, _} ->
         conn
     end

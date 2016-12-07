@@ -25,6 +25,19 @@ defmodule PhoenixTokenPlug.EnsureAuthenticatedTest do
     assert conn.assigns.unauthenticated
   end
 
+  test "can customize assign key" do
+    opts = Keyword.merge(@opts, key: :foo)
+    conn = conn() |> assign(:foo, @user) |> EnsureAuthenticated.call(opts)
+    assert conn.status != 401
+  end
+
+  test "should lookup only on given key" do
+    opts = Keyword.merge(@opts, key: :foo)
+    conn = conn() |> assign(:user, @user) |> EnsureAuthenticated.call(opts)
+    assert conn.status == 401
+    assert conn.assigns.unauthenticated
+  end
+
   defp conn do
     %Plug.Conn{}
   end
