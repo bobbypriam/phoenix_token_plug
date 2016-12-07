@@ -9,6 +9,10 @@ defmodule PhoenixTokenPlug.EnsureAuthenticatedTest do
     def unauthenticated(conn, _params) do
       conn |> put_status(401) |> assign(:unauthenticated, true)
     end
+
+    def handle_error(conn, _params) do
+      conn |> put_status(401) |> assign(:other_handler_function, true)
+    end
   end
 
   @opts handler: UnauthenticatedHandler
@@ -36,6 +40,13 @@ defmodule PhoenixTokenPlug.EnsureAuthenticatedTest do
     conn = conn() |> assign(:user, @user) |> EnsureAuthenticated.call(opts)
     assert conn.status == 401
     assert conn.assigns.unauthenticated
+  end
+
+  test "can customize handler function" do
+    opts = Keyword.merge(@opts, handler_fn: :handle_error)
+    conn = conn() |> EnsureAuthenticated.call(opts)
+    assert conn.status == 401
+    assert conn.assigns.other_handler_function
   end
 
   defp conn do
