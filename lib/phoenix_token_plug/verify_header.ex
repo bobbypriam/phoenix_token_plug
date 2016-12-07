@@ -26,7 +26,7 @@ defmodule PhoenixTokenPlug.VerifyHeader do
 
   @doc false
   def call(conn, opts) do
-    token = fetch_token(conn, opts)
+    token = fetch_token(get_req_header(conn, "authorization"))
     case verify_token(conn, token, opts) do
       {:ok, payload} ->
         assign(conn, :user, payload)
@@ -35,15 +35,11 @@ defmodule PhoenixTokenPlug.VerifyHeader do
     end
   end
 
-  defp fetch_token(conn, _opts) do
-    case get_req_header(conn, "authorization") do
-      [] ->
-        nil
-      [token|_tail] ->
-        token
-        |> String.replace("Bearer ", "")
-        |> String.trim
-    end
+  defp fetch_token([]), do: nil
+  defp fetch_token([token|_tail]) do
+    token
+    |> String.replace("Bearer ", "")
+    |> String.trim
   end
 
   defp verify_token(conn, token, opts) do
