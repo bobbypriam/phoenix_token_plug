@@ -14,21 +14,13 @@ This library kind of mirrors a part of what Guardian does except that it uses Ph
 
 ## Installation
 
-  1. Add `phoenix_token_plug` to your list of dependencies in `mix.exs`:
+Add `phoenix_token_plug` to your list of dependencies in `mix.exs`:
 
-    ```elixir
-    def deps do
-      [{:phoenix_token_plug, "~> 0.2"}]
-    end
-    ```
-
-  2. Ensure `phoenix_token_plug` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:phoenix_token_plug]]
-    end
-    ```
+```elixir
+def deps do
+  [{:phoenix_token_plug, "~> 0.2"}]
+end
+```
 
 ## Usage
 
