@@ -1,7 +1,7 @@
 defmodule PhoenixTokenPlug.Mixfile do
   use Mix.Project
 
-  @version "0.2.1"
+  @version "0.3.0"
   @url "https://github.com/bobbypriambodo/phoenix_token_plug"
   @maintainers [
     "Bobby Priambodo"
@@ -22,7 +22,7 @@ defmodule PhoenixTokenPlug.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:phoenix, :plug]]
+    []
   end
 
   # Dependencies can be Hex packages:
