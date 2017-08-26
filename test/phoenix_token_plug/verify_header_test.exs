@@ -42,7 +42,7 @@ defmodule PhoenixTokenPlug.VerifyHeaderTest do
   end
 
   defp authorized_conn(salt \\ "user") do
-    token = get_token(conn, salt, @user)
+    token = get_token(conn(), salt, @user)
     conn() |> put_req_header("authorization", "Bearer #{token}")
   end
 
