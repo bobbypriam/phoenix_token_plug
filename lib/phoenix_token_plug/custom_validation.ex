@@ -19,8 +19,22 @@ defmodule PhoenixTokenPlug.CustomValidation do
   the next series of plugs, while `false` will halt the `conn`
   and calls the `handler`.
 
-  If you want the validate function to also have the token
-  payload, put this plug after `PhoenixTokenPlug.VerifyHeader`.
+  The signature of `handler` and `handler_fn` is the same as the
+  one used for `PhoenixTokenPlug.EnsureAuthenticated`.
+
+  An example of the `validate_fn` is as follows:
+
+      defmodule MyApp.AuthController do
+        # ...
+
+        def not_blacklisted?(_conn, token, _params) do
+          not Auth.blacklisted?(token)
+        end
+
+        # ...
+      end
+
+  Note: you must put this plug after `PhoenixTokenPlug.VerifyHeader`.
 
   You might pass several options to the plug:
 

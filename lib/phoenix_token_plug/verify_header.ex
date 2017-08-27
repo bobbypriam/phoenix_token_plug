@@ -1,7 +1,8 @@
 defmodule PhoenixTokenPlug.VerifyHeader do
   @moduledoc """
   Checks if there is an authentication token is in the HTTP header.
-  If one exists, it assigns the token payload to `conn.assigns.user`.
+  If one exists, it assigns the token payload to `conn.assigns.user`,
+  and the token itself to `conn.assigns.token`.
 
   It assumes one Authorization header with Bearer prefix, such as
 
@@ -17,7 +18,7 @@ defmodule PhoenixTokenPlug.VerifyHeader do
       plug PhoenixTokenPlug.VerifyHeader,
         salt: "user",       # (optional) customize the salt for Phoenix.Token, defaults to "user"
         max_age: 1_209_600, # (optional) validate token max age in seconds, default to 1_209_600 (2 weeks)
-        key: :foo           # (optional) customize the conn assign key, defaults to :user
+        key: :foo           # (optional) customize the payload conn assign key, defaults to :user
   """
 
   import Plug.Conn
