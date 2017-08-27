@@ -1,3 +1,9 @@
+# v0.3.1
+
+* VerifyHeader now assigns token
+* CustomValidation does not fetch token directly from header
+* Improved CustomValidation docs with example
+
 # v0.3.0
 
 * Add [CustomValidation](https://hexdocs.pm/phoenix_token_plug/PhoenixTokenPlug.CustomValidation.html) plug
