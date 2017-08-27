@@ -31,7 +31,9 @@ defmodule PhoenixTokenPlug.VerifyHeader do
     token = fetch_token(get_req_header(conn, "authorization"))
     case verify_token(conn, token, opts) do
       {:ok, payload} ->
-        assign(conn, key, payload)
+        conn
+        |> assign(key, payload)
+        |> assign(:token, token)
       {:error, _} ->
         conn
     end

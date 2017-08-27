@@ -14,16 +14,23 @@ defmodule PhoenixTokenPlug.VerifyHeaderTest do
   test "does nothing if no token provided" do
     conn = conn() |> VerifyHeader.call([])
     assert conn.assigns[:user] == nil
+    assert conn.assigns[:token] == nil
   end
 
   test "does nothing if signing salt is different" do
     conn = authorized_conn("user") |> VerifyHeader.call(salt: "not_user")
     assert conn.assigns[:user] == nil
+    assert conn.assigns[:token] == nil
   end
 
   test "assigns user to conn if token valid" do
     conn = authorized_conn("user") |> VerifyHeader.call(salt: "user")
     assert conn.assigns.user == @user
+  end
+
+  test "assigns token to conn if token valid" do
+    conn = authorized_conn("user") |> VerifyHeader.call(salt: "user")
+    assert conn.assigns.token != nil
   end
 
   test "salt defaults to \"user\"" do

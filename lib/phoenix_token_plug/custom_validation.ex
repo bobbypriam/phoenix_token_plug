@@ -37,7 +37,7 @@ defmodule PhoenixTokenPlug.CustomValidation do
 
   @doc false
   def call(conn, opts) do
-    token = fetch_token(get_req_header(conn, "authorization"))
+    token = conn.assigns.token
     validate_fn = Keyword.get(opts, :validate_fn)
     handler = Keyword.get(opts, :handler)
     handler_fn = Keyword.get(opts, :handler_fn, :unauthenticated)
@@ -50,13 +50,6 @@ defmodule PhoenixTokenPlug.CustomValidation do
       conn = conn |> halt
       apply(handler, handler_fn, [conn, conn.params])
     end
-  end
-
-  defp fetch_token([]), do: nil
-  defp fetch_token([token|_tail]) do
-    token
-    |> String.replace("Bearer ", "")
-    |> String.trim
   end
 
 end
